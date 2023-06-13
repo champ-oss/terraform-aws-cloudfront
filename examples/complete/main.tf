@@ -30,7 +30,7 @@ data "aws_route53_zone" "this" {
 }
 
 module "this" {
-  source             = "../../"
-  vpc_id             = data.aws_vpcs.this.ids[0]
-  zone_id =  data.aws_route53_zone.this.zone_id
+  source  = "../../"
+  vpc_id  = data.aws_vpcs.this.ids[0]
+  zone_id = data.aws_route53_zone.this.zone_id
 }

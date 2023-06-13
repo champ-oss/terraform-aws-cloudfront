@@ -30,7 +30,7 @@ variable "domain" {
 variable "dns_name" {
   description = "DNS name for API service"
   type        = string
-  default     = var.git
+  default     = "terraform-aws-cdn"
 }
 
 variable "enable_waf" {
