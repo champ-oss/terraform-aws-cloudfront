@@ -1,5 +1,5 @@
 module "acm" {
-  source            = "github.com/champ-oss/terraform-aws-acm.git?ref=v1.0.112-8f39765"
+  source            = "github.com/champ-oss/terraform-aws-acm.git?ref=952c6ed8c6d1d8d7e7718a17dc524f00cda02d5c"
   git               = var.git
   domain_name       = "${var.dns_name}.${var.domain}"
   create_wildcard   = false
