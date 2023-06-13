@@ -15,5 +15,5 @@ data "aws_route53_zone" "this" {
 module "this" {
   source  = "../../"
   zone_id = data.aws_route53_zone.this.zone_id
-  domain = data.aws_route53_zone.this.name
+  domain  = data.aws_route53_zone.this.name
 }
