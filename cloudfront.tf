@@ -1,10 +1,10 @@
 resource "aws_cloudfront_origin_access_identity" "this" {
-  protect = var.protect
+  provider           = aws.virginia
   comment = "OIA for ${var.dns_name}.${var.domain}"
 }
 
 resource "aws_cloudfront_distribution" "this" {
-  protect             = var.protect
+  provider           = aws.virginia
   enabled             = true
   aliases             = ["${var.dns_name}.${var.domain}"]
   default_root_object = var.default_root_object
