@@ -1,5 +1,9 @@
 data "aws_iam_policy_document" "this" {
   statement {
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
     actions = ["s3:GetObject"]
     resources = [
       module.s3.arn,
@@ -13,6 +17,10 @@ data "aws_iam_policy_document" "this" {
   }
 
   statement {
+    principals {
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
     actions = ["s3:ListBucket"]
     resources = [
       module.s3.arn,
