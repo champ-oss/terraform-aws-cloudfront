@@ -72,7 +72,7 @@ variable "default_root_object" {
 variable "minimum_protocol_version" {
   description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudfront_distribution#minimum_protocol_version"
   type        = string
-  default     = "TLSv1.2_2019"
+  default     = "TLSv1.2_2018"
 }
 
 variable "name" {
