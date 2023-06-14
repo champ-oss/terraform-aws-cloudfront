@@ -5,10 +5,10 @@ data "aws_iam_policy_document" "this" {
       module.s3.arn,
       "${module.s3.arn}/*"
     ]
-
-    principals {
-      type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.this.iam_arn]
+    condition {
+      variable = "aws:SourceArn"
+      test     = "StringEquals"
+      values   = [aws_cloudfront_distribution.this.arn]
     }
   }
 
@@ -19,9 +19,10 @@ data "aws_iam_policy_document" "this" {
       "${module.s3.arn}/*"
     ]
 
-    principals {
-      type        = "AWS"
-      identifiers = [aws_cloudfront_origin_access_identity.this.iam_arn]
+    condition {
+      variable = "aws:SourceArn"
+      test     = "StringEquals"
+      values   = [aws_cloudfront_distribution.this.arn]
     }
   }
 }
