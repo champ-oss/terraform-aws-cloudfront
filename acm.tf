@@ -12,7 +12,7 @@ module "acm" {
 
 # creating A record for domain:
 resource "aws_route53_record" "this" {
-  name    = "${var.git}.${var.name}"
+  name    = "${var.dns_name}.${var.domain}"
   zone_id = var.zone_id
   type    = "A"
   alias {
