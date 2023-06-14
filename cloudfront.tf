@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "this" {
   }
   tags = merge({ Name = var.git }, local.tags, var.tags)
   viewer_certificate {
-    acm_certificate_arn      = module.acm.arn
+    acm_certificate_arn      = module.acm.arn_minus_sleep
     ssl_support_method       = "sni-only"
     minimum_protocol_version = var.minimum_protocol_version
   }
