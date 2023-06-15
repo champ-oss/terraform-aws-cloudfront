@@ -1,9 +1,9 @@
-output "private_subnet_ids" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group#subnet_ids"
-  value       = var.private_subnet_ids
+output "s3_arn" {
+  description = "s3 arn"
+  value       = module.s3.arn
 }
 
-output "vpc_id" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id"
-  value       = var.vpc_id
+output "s3_bucket" {
+  description = "s3 bucket"
+  value       = module.s3.bucket
 }
