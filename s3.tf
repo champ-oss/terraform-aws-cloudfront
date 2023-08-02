@@ -16,17 +16,6 @@ resource "aws_s3_bucket_website_configuration" "this" {
   }
 }
 
-resource "aws_s3_object" "this" {
-  bucket       = module.s3.bucket
-  for_each     = fileset("uploads/", "*")
-  key          = "website/${each.value}"
-  source       = "uploads/${each.value}"
-  etag         = filemd5("uploads/${each.value}")
-  content_type = "text/html"
-  depends_on = [
-    module.s3
-  ]
-}
 
 # cloudfront s3 bucket policy
 resource "aws_s3_bucket_policy" "this" {
