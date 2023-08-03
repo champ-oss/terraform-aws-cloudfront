@@ -24,7 +24,6 @@ jobs:
             .github/CODEOWNERS
             .github/dependabot.yml
             .github/workflows/lint.yml
-            .github/workflows/module.yml
             .github/workflows/release.yml
             .github/workflows/sonar.yml
             .github/workflows/sync.yml
