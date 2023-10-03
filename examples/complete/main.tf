@@ -1,12 +1,6 @@
-terraform {
-  backend "s3" {}
-}
-
 provider "aws" {
   region = "us-east-2"
 }
-
-data "aws_region" "current" {}
 
 data "aws_route53_zone" "this" {
   name = "oss.champtest.net."
