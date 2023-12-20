@@ -20,11 +20,14 @@ env:
   MONGODB_ATLAS_PRIVATE_KEY: ${{ secrets.MONGODB_ATLAS_PRIVATE_KEY }}
   MONGODB_ATLAS_PUBLIC_KEY: ${{ secrets.MONGODB_ATLAS_PUBLIC_KEY }}
   MONGODB_ATLAS_ORG: ${{ secrets.MONGODB_ATLAS_ORG }}
+  TF_VAR_mongodb_atlas_org: ${{ secrets.MONGODB_ATLAS_ORG }}
   SLACK_URL: ${{ secrets.SLACK_URL }}
   TF_VAR_slack_url: ${{ secrets.SLACK_URL }}
   NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
   NEW_RELIC_REGION: ${{ secrets.NEW_RELIC_REGION }}
   NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+  GITHUB_TOKEN: ${{ secrets.CHAMP_TESTING_GITHUB_TOKEN }}
+  GITHUB_OWNER: "champ-testing"
 
 jobs:
   list-examples:
@@ -62,14 +65,17 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
           aws-region: ${{ env.AWS_DEFAULT_REGION }}
-      - uses: hashicorp/setup-terraform@v2.0.3 # https://github.com/hashicorp/setup-terraform/releases
+      - uses: hashicorp/setup-terraform@v3.0.0 # https://github.com/hashicorp/setup-terraform/releases
         with:
-          terraform_version: 1.5.5 # https://github.com/hashicorp/terraform/releases
+          terraform_version: 1.6.2 # https://github.com/hashicorp/terraform/releases
           terraform_wrapper: false
       - name: copy lockfile
         run: cp ../complete/.terraform.lock.hcl . || true
       - name: init
         run: terraform init
+      - name: disable prevent_destroy
+        working-directory: .
+        run: find . -type f -name '*.tf' -exec sed -i'' -e 's/prevent_destroy = true/prevent_destroy = false/g' {} +
       - name: validate
         run: terraform validate
       - name: plan
@@ -103,7 +109,7 @@ jobs:
   module:
     runs-on: ubuntu-latest
     if: always()
-    needs: [ run-example, check-examples ]
+    needs: [run-example, check-examples]
     steps:
       - name: module
         working-directory: .
